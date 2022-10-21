@@ -112,6 +112,7 @@ function highlightSchoolsOnMap(schoolsToCompare) {
   if(baseMap.highlightLayers !== undefined) {
     baseMap.removeLayer(baseMap.highlightLayers);
   }
+
   baseMap.highlightLayers = L.geoJSON(highlightSchoolFeatureCollection, {
     pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
     style: {
@@ -122,9 +123,9 @@ function highlightSchoolsOnMap(schoolsToCompare) {
       weight: 5,
     },
   })
+  .addTo(baseMap)
   .bindPopup(schoolPoint => schoolPoint.feature.properties["school_name"], { "autoClose": false, "popupOpen": true })
-  .openPopup()
-  .addTo(baseMap);
+  .openPopup();
 }
 
 //-----------------------------------------------//
@@ -232,7 +233,7 @@ function showCatchments(schoolsToCompare) {
 // ONCLICK: EVERYTIME NEW HIGHLIGHT/UNHIGHLIGHT HAPPENS
 //-----------------------------------------------//
 
-// Function: add listener that does something everytime we click on something
+// Function: add listener that highlight school selection triggers other things
 // The reason to wrap things up in a function is:
 // Everytime we do filter, we need to re-add listener
 

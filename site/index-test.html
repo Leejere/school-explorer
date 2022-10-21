@@ -34,43 +34,45 @@
             </div>
 
             <!-- Main -->
-            <div class="row">
-                <!-- Map (first column) -->
-                <div class="col-sm-12 col-l-6 col-xl-6">
-                    <div class="viewport-70 padding-right-big-screen">
-                        <div id="school-map" class="entire-width-height"></div>
-                    </div>
-                </div>
-                <!-- Second column: the two filters AND school list-->
-                <div class="col-sm-6 col-l-3 col-xl-3">
-                    <div class="viewport-70 flex-column-space-between">
-                        <div class="filter-title">Filter by Grade</div>
-                        <!-- A set of checkboxes; this is added in main.js -->
-                        <div id="grade-select-set"></div>
+            <div class="main-container">
 
-                        <div class="filter-title">Filter by Name</div>
-                        <!-- Add a text input box -->
-                        <div class="input-box">
-                            <input type="text" class="text-input" id="school-name-input" placeholder="Enter Name">
-                        </div>
-                        <!-- A box that shows all the schools filtered -->
-                        <div class="list-container">
-                            <ul id="school-list" class="listbox"></ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-l-3 col-xl-3">
-                    <div class="viewport-70 flex-column-space-between">
-                        <div class="school-compare-scroll-box">
-                            <div id="school-compare-container"></div>
-                        </div>
-                        <div class="save-reload">
-                            <p id="click-to-copy-url">Share Selection</p>
-                            <a href="index.html">Clear Selection</a>
-                        </div>
-                    </div>
-                </div>
+              <!-- Map background -->
+              <div class="map-background fixed">
+                <div id="school-map" class="entire-width-height"></div>
+              </div>
 
+              <!-- Column of two filters -->
+              <div class="col-sm-6 col-l-4 col-xl-3 layer-top clear-right">
+                <div class="viewport-70 flex-column-space-between">
+                    <div class="filter-title">Filter by Grade</div>
+                    <!-- A set of checkboxes; this is added in main.js -->
+                    <div id="grade-select-set"></div>
+                    <div id="grade-select"></div>
+
+                    <div class="filter-title">Filter by Name</div>
+                    <!-- Add a text input box -->
+                    <div class="input-box">
+                        <input type="text" class="text-input" id="school-name-input" placeholder="Enter Name">
+                    </div>
+                    <!-- A box that shows all the schools filtered -->
+                    <div class="list-container">
+                        <ul id="school-list" class="listbox"></ul>
+                    </div>
+                  </div>
+              </div>
+
+              <!-- Column of selection results -->
+              <div class="col-sm-12 col-l-4 col-xl-3 float-right layer-top">
+                  <div class="viewport-70 flex-column-space-between">
+                      <div class="school-compare-scroll-box">
+                          <div id="school-compare-container"></div>
+                      </div>
+                      <div class="save-reload">
+                          <p id="click-to-copy-url">Share Selection</p>
+                          <a href="index.html">Clear Selection</a>
+                      </div>
+                  </div>
+              </div>
             </div>
         </div>
             

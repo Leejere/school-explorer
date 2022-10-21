@@ -62,6 +62,13 @@ for(const grade of gradeArr) {
     `;
     const gradeCheckbox = htmlToElement(html);
     document.querySelector("#grade-select-set").append(gradeCheckbox);
+
+    const gradeNumber = grade.slice(6);
+    const html2 = `
+        <div class="grade-select-item" value=0>${gradeNumber}<div>
+    `;
+    const htmlElement = htmlToElement(html2);
+    document.querySelector("#grade-select").append(htmlElement);
 }
 
 //-----------------------------------------------//
@@ -116,6 +123,9 @@ for(const checkbox of schoolGradeFilters){
         schoolsShownOnMap = filterByGrade(filterByName(schools));
         showSchoolsOnMap(schoolsShownOnMap, baseMap);
         showSchoolsInList(schoolsShownOnMap, schoolList);
+
+        // PrepareHighlight is to add an event listener to every listed school
+        // Everytime the list changes, we need to re-add listeners
         prepareHighlight();
     });
 }
@@ -126,6 +136,9 @@ schoolNameFilter.addEventListener('input', ( ) => {
     schoolsShownOnMap = filterByGrade(filterByName(schools));
     showSchoolsOnMap(schoolsShownOnMap, baseMap);
     showSchoolsInList(schoolsShownOnMap, schoolList);
+
+    // PrepareHighlight is to add an event listener to every listed school
+    // Everytime the list changes, we need to re-add listeners
     prepareHighlight();
 });
 
