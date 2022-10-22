@@ -110,7 +110,7 @@ function highlightSchoolsOnMap(schoolsToCompare) {
   baseMap.highlightLayers = L.geoJSON(highlightSchoolFeatureCollection, {
     pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
     style: {
-      radius: 5,
+      radius: 10,
       color: "#ef8872",
       fillColor: "#ef8872",
       fillOpacity: 0.5,

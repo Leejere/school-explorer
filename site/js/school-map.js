@@ -33,7 +33,7 @@ function getLevelColors(level) {
 
 function schoolMarkerStyle(feature) {
     return {
-        radius: 4,
+        radius:7,
         color: getLevelColors(feature.properties.school_level),
         fillOpacity: 0.4,
         opacity: 0.7,
