@@ -79,7 +79,7 @@ function loadState() {
 let urlHash = window.location.hash.substring(1, window.location.hash.length);
 let copyButton = document.querySelector("#click-to-copy-url");
 copyButton.addEventListener("click", ( ) => {
-  navigator.clipboard.writeText("https://leejere.github.io/school-explorer/site/index.html#".concat(urlHash));
+  navigator.clipboard.writeText("https://leejere.github.io/school-explorer/site#".concat(urlHash));
   copyButton.innerHTML = `Share Selection<span class="tooltiptext">Copied selection URL</span>`;
 });
 

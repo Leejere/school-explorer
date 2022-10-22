@@ -35,7 +35,7 @@
 #click-to-copy-url .tooltiptext {
   visibility: hidden;
   width: 12em;
-  background-color: #353795;
+  background-color: #c8b7d9;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -55,7 +55,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #353795 transparent transparent;
+  border-color: #c8b7d9 transparent transparent;
 }
 
 #click-to-copy-url:hover .tooltiptext {
