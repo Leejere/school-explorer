@@ -152,7 +152,7 @@ schoolNameFilter.addEventListener('input', ( ) => {
 let legend = L.control({ position: "bottomright" });
 legend.onAdd = function(map) {
     let div = L.DomUtil.create("div", "legend");
-    div.innerHTML += "Test";
+    div.innerHTML += "";
     return div;
 };
 
