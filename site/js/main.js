@@ -21,7 +21,7 @@ import { prepareHighlight } from './school-compare.js';
 import { htmlToElement } from "./template-tools.js";
 
 // This is an array that starts from "Grade 1" to "Grade 12" and "Grade K"
-// It is used to extract certain properties (whether has a certain grade) from schools.js when making a school feature
+// It is used to extract certain properties (whether has a certain grade) fro    schools.js when making a school feature
 export const gradeArr = Object.keys(schools[0]).filter(key => {
     if((key.indexOf('Grade') === 0) && (key.length < 9)){
         return true;
@@ -39,7 +39,7 @@ let schoolMap = document.querySelector("#school-map");
 export let baseMap = L.map(schoolMap, { zoomControl: false }).setView([40, -75.15], 11);
 // For other map tile styles, see this website:https://leaflet-extras.github.io/leaflet-providers/preview/
 
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=029695db-b34b-4602-a119-bcf44d2d87d6', {
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=b59111c3-b70c-4361-b0be-47c9cd323fea', {
     maxZoom: 20,
     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
 }).addTo(baseMap);
