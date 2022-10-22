@@ -33,10 +33,12 @@
 }
 
 .school-compare-item {
-  border: 2px solid #353795;
-  margin: 1em 0.5em 1em 0;
+  border: 1.5px solid #353795;
+  margin: 1em 0 1em 0;
   padding: 0.5em 0.5em 0.5em 1em;
   background-color: #fff;
+  border-bottom-width: 4px;
+  border-radius: 0 0 0.5em 0.5em;
 }
 
 .school-compare-item > .school-name {

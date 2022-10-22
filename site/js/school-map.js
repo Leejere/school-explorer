@@ -1,3 +1,5 @@
+import { highlightActions } from "./school-compare.js";
+
 // Schoolmap-related funcs
 
 // Function 2: make individual school features
@@ -19,23 +21,24 @@ function makeSchoolFeature(school) {
 }
 
 function getLevelColors(level) {
-    return level === "High" ? "#353795":
-           level === "Middle" ? "#353795":
-           level === "Elementary-Middle" ? "#353795":
-           level === "Elementary" ? "#353795":
-           level === "Middle-High" ? "#353795":
-           level === "Transition/Overage School" ? "#353795":
-           level === "Elementary-Middle-High" ? "#353795":
-                     "#353795";
+    return level === "High" ? "#c8b7d9":
+           level === "Middle" ? "#c8b7d9":
+           level === "Elementary-Middle" ? "#c8b7d9":
+           level === "Elementary" ? "#c8b7d9":
+           level === "Middle-High" ? "#c8b7d9":
+           level === "Transition/Overage School" ? "#c8b7d9":
+           level === "Elementary-Middle-High" ? "#c8b7d9":
+                     "#c8b7d9";
 }
 
 function schoolMarkerStyle(feature) {
     return {
-        radius: 5,
+        radius: 4,
         color: getLevelColors(feature.properties.school_level),
-        fillOpacity: 0.5,
+        fillOpacity: 0.4,
+        opacity: 0.7,
         stroke: true,
-        weight: 0.7,
+        weight: 1,
     };
 }
 
@@ -70,7 +73,26 @@ function showSchoolsOnMap(schoolsToShow, baseMap) {
         style: schoolMarkerStyle,
     })
     .bindPopup(schoolPoint => schoolPoint.feature.properties['school_name'])
+
+    // If a feature is selected, then it gets added to the highlight group
+    .on("click", ( e ) => {
+
+        // Find the corresponding school in the school list and make its value to 1
+        // Note that this action is only one-directional. Only turn non-highlight into highlight
+        // Another event listener to be attached to the highlight symbol in school-compare.js
+
+        let schoolsShownInList = document.querySelectorAll(".school-list-item, .school-list-item-clicked");
+
+        for(let schoolShown of schoolsShownInList) {
+            if(schoolShown.title == e.layer.feature.properties.school_name) {
+                schoolShown.value = 1;
+                break;
+            }
+        }
+        highlightActions();
+    })
     .openPopup().addTo(baseMap);
+
 }
 
 export{

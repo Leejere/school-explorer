@@ -110,12 +110,26 @@ function highlightSchoolsOnMap(schoolsToCompare) {
   baseMap.highlightLayers = L.geoJSON(highlightSchoolFeatureCollection, {
     pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
     style: {
-      radius: 12,
-      color: "#353795",
+      radius: 5,
+      color: "#ef8872",
+      fillColor: "#ef8872",
       fillOpacity: 0.5,
-      stroke: true,
       weight: 5,
     },
+  })
+  .on("click", ( e ) => {
+    let schoolsShownInList = document.querySelectorAll(".school-list-item, .school-list-item-clicked");
+
+    for(let schoolShown of schoolsShownInList) {
+        if(schoolShown.title == e.layer.feature.properties.school_name) {
+            schoolShown.value = 0;
+            break;
+        }
+    }
+    // This function is defined later
+    // But by the time the even listener is triggered, this function will have been defined
+    highlightActions();
+    console.log("Removed highlight!");
   })
   .addTo(baseMap)
   .bindPopup(schoolPoint => schoolPoint.feature.properties["school_name"], { "autoClose": false, "popupOpen": true })
@@ -193,10 +207,11 @@ function showCatchments(schoolsToCompare) {
 
     baseMap.cityLayer = L.geoJSON(cityLimit, {
       style: {
-        color: "#353795",
-        fillOpacity: 0.07,
+        color: "#ef8872",
+        fillOpacity: 0.05,
+        fillColor: "#ef8872",
         stroke: true,
-        weight: 0.5,
+        weight: 0.3,
       },
     })
     .bindPopup(phrase)
@@ -206,8 +221,8 @@ function showCatchments(schoolsToCompare) {
   // Add catchment layers
   baseMap.catchmentLayers = L.geoJSON(filteredCatchments, {
     style: {
-      color: "#353795",
-      fillOpacity: 0.07,
+      color: "#fec7ba",
+      fillOpacity: 0.2,
       stroke: true,
       weight: 1.7,
     },
@@ -224,10 +239,46 @@ function showCatchments(schoolsToCompare) {
 }
 
 //-----------------------------------------------//
-// ONCLICK: EVERYTIME NEW HIGHLIGHT/UNHIGHLIGHT HAPPENS
+// WHAT TO DO IF YOU ALREADY HAVE A LIST OF SCHOOLS
+// TO HIGHLIGHT
 //-----------------------------------------------//
 
-// Function: add listener that highlight school selection triggers other things
+function highlightActions() {
+
+  const schoolsToCompare = getSchoolsToCompare();
+
+  // 1. Highlight in List
+  let schoolsShownInList = document.querySelectorAll(".school-list-item, .school-list-item-clicked");
+  for(let schoolInList of schoolsShownInList) {
+    schoolInList.className = schoolListItemClassNames[schoolInList.value];
+  }
+  // If there are schools highlighted, show button
+  if(schoolsToCompare.length == 0) {
+    document.querySelector(".save-reload").style.display = "none";
+  } else {
+    document.querySelector(".save-reload").style.display = "flex";
+    document.querySelector(".save-reload").style.justifyContent = "space-between";
+  }
+  // Show catchments of highlighted schools
+  showCatchments(schoolsToCompare);
+
+  // Show highlighted school on the map
+  highlightSchoolsOnMap(schoolsToCompare);
+
+  // Show comparing school
+  showSchoolsCompare(schoolsToCompare);
+
+  // Save current state to URL
+  saveStateToUrl(schoolsToCompare);
+}
+
+//-----------------------------------------------//
+// ADD EVENT LISTENER TO SCHOOL LIST ITEMS
+// TO MAKE IT RESPOND TO HIGHLIGHT ACTION
+//-----------------------------------------------//
+
+// Function: add listener to school list
+// that highlight school selection triggers other things
 // The reason to wrap things up in a function is:
 // Everytime we do filter, we need to re-add listener
 
@@ -245,46 +296,35 @@ function prepareHighlight() {
       // What happens when something is clicked?
       // 1. Highlight/unhighlight
       // 2. Calculate a list of all currently highlighted schools
+
+      // We need a comprehensive list to show if each school is highlighted
+      // We use the value in schoolShown to do that
       if(schoolShown.value == 0) {
           schoolShown.value = 1;
       } else {
           schoolShown.value = 0;
       }
-
-      // Highlight or unhighlight by changing the CSS class
-      schoolShown.className = schoolListItemClassNames[schoolShown.value];
-
-      // Generate the current schools
-      const schoolsToCompare = getSchoolsToCompare();
-
-      // If there are schools highlighted, show button
-      if(schoolsToCompare.length > 0) {
-        document.querySelector(".save-reload").style.display = "block";
-      }
-
-      // Show catchments of highlighted schools
-      showCatchments(schoolsToCompare);
-
-      // Show highlighted school on the map
-      highlightSchoolsOnMap(schoolsToCompare);
-
-      // Show comparing school
-      showSchoolsCompare(schoolsToCompare);
-
-      // Save current state to URL
-      saveStateToUrl(schoolsToCompare);
+      // Do a series of actions regarding highlight
+      highlightActions();
     });
     }
-
-
   }
 }
+
+//-----------------------------------------------//
+// ADD EVENT LISTENER TO SCHOOL MAP MARKERS
+// THIS IS DONE IN showSchoolsOnMap IN schoo-map.js
+//-----------------------------------------------//
+
+// We also need to add an event listener to the school markers
 
 export{
   prepareHighlight,
   showCatchments,
   highlightSchoolsOnMap,
   showSchoolsCompare,
+  getSchoolsToCompare,
+  highlightActions,
 };
 
 window.catchments = catchments;

@@ -42,29 +42,44 @@
 
         <!-- Core Content -->
         <!-- FIRST COLUMN -->
-        <div class="col-sm-6 col-l-4 col-xl-4 col-xxl-3 main-filters">
-            <!-- Grade Selector -->
-            <div class="grade-select-container">
-                <ul id="grade-select">
-                    <li class="grade-select-title">
-                        <div class="grade-select-item-inside">Select grade</div>
-                    </li>
-                </ul>
-            </div>
-
-            <!--Name selector -->
-            <div class="fix-height">
-                <div class="input-box">
-                    <input type="text" class="text-input" id="school-name-input" placeholder="Search by Name">
+        <div class="col-sm-6 col-l-5 col-xl-4 col-xxl-3 main-filters">
+            <div class="hide-show" id="show-button">
+                <div class="hide-show-inside">
+                    <span class="material-symbols-outlined" id="show-text">expand_more</span>
                 </div>
             </div>
-            <!-- School list -->
-            <div class="list-container">
-                <ul id="school-list" class="listbox"></ul>
+            <!-- Grade Selector -->
+            <div id="hidable-chunk">
+                <div class="grade-select-container">
+                    <ul id="grade-select">
+                        <li class="hide-show" id="hide-button">
+                            <div class="hide-show-inside">
+                                <span class="material-symbols-outlined" id="hide-text">expand_less</span>
+                            </div>
+                        </li>
+                        <li class="grade-select-title">
+                            <div class="grade-select-item-inside">grade</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--Name selector -->
+                <div class="fix-height">
+                    <div class="input-box">
+                        <input type="text" class="text-input" id="school-name-input" placeholder="Search by Name">
+                    </div>
+                </div>
+                <!-- School list -->
+                <div class="list-border-container">
+                    <div class="list-container">
+                        <ul id="school-list" class="listbox"></ul>
+                    </div>
+                </div>
+                <div id="school-list-expand-button">
+                    <span class="material-symbols-outlined">expand_more</span>
+                </div>
             </div>
-            <div id="school-list-expand-button">
-                <span class="material-symbols-outlined">expand_more</span>
-            </div>
+
         </div>
 
         <!-- SECOND COLUMN -->
@@ -87,6 +102,7 @@
         <script type="module" src="js/school-compare.js"></script>
         <script type="module" src="js/url-hash.js"></script>
         <script type="module" src="js/expand-list.js"></script>
+        <script type="module" src="js/hide-show-filters.js"></script>
         <!-- LoDash -->
         <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
         

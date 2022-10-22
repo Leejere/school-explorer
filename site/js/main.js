@@ -163,3 +163,4 @@ window.gradeArr = gradeArr;
 window.schoolList = schoolList;
 window.schoolNameFilter = schoolNameFilter;
 window.schoolsShownOnMap = schoolsShownOnMap;
+window.baseMap = baseMap;

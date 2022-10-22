@@ -4,7 +4,61 @@
 
 /* ---------------------------------------------- */
 
-/* First the container */
+/* Hide show button */
+
+.hide-show {
+  display: none;
+  float: left;
+  width: 11.2%;
+  padding: 1px 0;
+  margin-right: 0.2em;
+}
+
+.hide-show > .hide-show-inside {
+  float: left;
+  width: 100%;
+  background-color: #ef8872;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 14px;
+  border: 1.5px solid #ef8872;
+  border-right-width: 0;
+  padding: 0.1em 0;
+  display: block;
+  line-height: 1.5;
+  border-radius: 0.5em;
+}
+
+#hide-button {
+  line-height: 0.5;
+  font-size: 14px;
+  font-weight: 800;
+  display: block;
+}
+
+#show-button {
+  line-height: 0.5;
+  font-size: 14px;
+  font-weight: 800;
+  display: none;
+}
+
+#hide-text {
+  line-height: 0.5;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#show-text {
+  line-height: 0.5;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Container */
 
 .grade-select-container {
   margin-bottom: 1em;
@@ -23,11 +77,13 @@
   display: table;
 }
 
+/* Title */
+
 .grade-select-title {
   display: block;
   float: left;
-  width: 37.5%;
-  padding: 1px;
+  width: 25%;
+  padding: 1px 0;
 }
 
 .grade-select-title > .grade-select-item-inside {
@@ -37,10 +93,12 @@
   color: #fff;
   font-weight: 600;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   border: 1.5px solid #353795;
   padding: 0.1em 0;
   display: block;
+  line-height: 1.5;
+  border-radius: 0 0 0.5em 0.5em;
 }
 
 .grade-select-item {
@@ -68,6 +126,9 @@
   border: 1.5px solid #353795;
   padding: 0.2em 0;
   display: block;
+  border-bottom-width: 3px;
+  border-radius: 0 0 0.5em 0.5em;
+  cursor: pointer;
 }
 
 .grade-select-item-clicked > .grade-select-item-inside {
@@ -81,6 +142,9 @@
   border: 1.5px solid #353795;
   padding: 0.2em 0;
   display: block;
+  border-bottom-width: 3px;
+  border-radius: 0 0 0.5em 0.5em;
+  cursor: pointer;
 }
 
 .grade-select-item:hover > .grade-select-item-inside {

@@ -4,15 +4,17 @@ input[type="text"] {
   font-size: 12px;
   border: 1.5px solid #353795;
   padding: 0.5em;
-  border-radius: 0;
   color: #353795;
+  border-bottom-width: 3px;
+  border-radius: 0 0 0.5em 0.5em;
 }
 
 input:focus {
   background-color: #fff;
-  border-radius: 0;
   border: 3px solid #353795;
   outline: none;
+  border-bottom-width: 3px;
+  border-radius: 0 0 0.5em 0.5em;
 }
 
 .fix-height {

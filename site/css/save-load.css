@@ -15,9 +15,9 @@
   display: inline-block;
   position: relative;
   margin: 0 0.5em;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
-  background-color: #353795;
+  background-color: #ef8872;
   color: #fff;
   padding: 0.5em;
   border-radius: 0.3em;
@@ -34,8 +34,8 @@
 
 #click-to-copy-url .tooltiptext {
   visibility: hidden;
-  width: 12em;
-  background-color: #c8b7d9;
+  width: 11em;
+  background-color: #fec7ba;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -45,6 +45,7 @@
   bottom: 150%;
   left: 50%;
   margin-left: -60px;
+  font-weight: 500;
 }
 
 #click-to-copy-url .tooltiptext::after {
@@ -55,7 +56,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #c8b7d9 transparent transparent;
+  border-color: #fec7ba transparent transparent;
 }
 
 #click-to-copy-url:hover .tooltiptext {

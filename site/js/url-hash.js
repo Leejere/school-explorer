@@ -9,6 +9,7 @@ import { showSchoolsOnMap } from "./school-map.js";
 import { showSchoolsInList } from "./school-list.js";
 import { baseMap } from "./main.js";
 import { schoolList } from "./main.js";
+import { highlightActions } from "./school-compare.js";
 
 //-----------------------------------------------//
 // FUNCTION TO SAVE CURRENT STATE INTO AN URL
@@ -32,7 +33,6 @@ function saveStateToUrl(schoolsToCompare) {
 
   // Generate an URL
   window.location.hash = highlightIdArr;
-  console.log(window.location.toString());
 }
 
 //-----------------------------------------------//
@@ -49,26 +49,23 @@ function loadState() {
     let idArr = urlHash.split(",");
     // Get array of schools objects
     let schoolsSelected = schools.filter(school => idArr.includes(school["sdp_id"]));
+
     // Get array of school names
     let schoolsSelectedNameArr = [];
-
     for(let school of schoolsSelected) {
       schoolsSelectedNameArr.push(school["name"]);
     }
 
-    // Step 1: Show catchment area
-    showCatchments(schoolsSelectedNameArr);
-    // Step 2: Highlight selected schools on the map
-    highlightSchoolsOnMap(schoolsSelectedNameArr);
-    // Step 3: Show compare
-    showSchoolsCompare(schoolsSelectedNameArr);
+    // In schoolList, change values
+    let schoolsShownInList = document.querySelectorAll(".school-list-item, .school-list-item-clicked");
 
-    let schoolsToShow = schools.filter(school => schoolsSelectedNameArr.includes(school["name"]));
-    showSchoolsOnMap(schoolsToShow, baseMap);
-    showSchoolsInList(schoolsToShow, schoolList);
-    document.querySelector(".save-reload").style.display = "block";
-    window.schoolsToShow = schoolsToShow;
-
+    for(let schoolShown of schoolsShownInList) {
+        if(schoolsSelectedNameArr.includes(schoolShown.title)) {
+            schoolShown.value = 1;
+            break;
+        }
+    }
+    highlightActions();
   }
 }
 
