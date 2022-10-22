@@ -63,13 +63,6 @@ function showSchoolsCompare(schoolsToCompare) {
             thisGradeArr.push(grade.substring(6));
         }
     }
-    // Get major interventions
-    let majorIntervention;
-    if(school["Major Intervention"] != "N/A") {
-      majorIntervention = school["Major Intervention"];
-    } else {
-      majorIntervention = "No major intervention";
-    }
     // Create content for schools for comparison
     const html = `
       <div class="school-compare-item">
@@ -78,7 +71,6 @@ function showSchoolsCompare(schoolsToCompare) {
           <div class="item-title">${school["Admission Type"]}</div>
           <div class="item-title">Grade ${thisGradeArr.join(", ")}</div>
           <div class="item-title">${school["Learning Network"]}</div>
-          <div class="item-title">${majorIntervention}</div>
         </div>
       </div>
     `;
@@ -99,7 +91,9 @@ function highlightSchoolsOnMap(schoolsToCompare) {
   let schoolsAfterRemove = schoolsShownOnMap;
   schoolsAfterRemove = schoolsAfterRemove.filter(school =>
     !(schoolsToCompare.includes(school["name"])));
-  showSchoolsOnMap(schoolsAfterRemove, baseMap);
+
+    // Reuse old function to show shools on the map
+    showSchoolsOnMap(schoolsAfterRemove, baseMap);
 
   // Then, re-add the schools in a highlighted way
   const schoolsToHighlight = schoolsShownOnMap.filter(school =>
@@ -242,6 +236,7 @@ function prepareHighlight() {
   let schoolsShownInList = document.querySelectorAll(".school-list-item, .school-list-item-clicked");
   for(let schoolShown of schoolsShownInList) {
 
+    if(schoolShown.title != "No Result") {
     // Check if this school is currently highlighted. If so, unhighlight on click
     // We do this by changing the value of the HTML element
     // Originally set to 0; if highlighted, value is set to 1
@@ -262,6 +257,11 @@ function prepareHighlight() {
       // Generate the current schools
       const schoolsToCompare = getSchoolsToCompare();
 
+      // If there are schools highlighted, show button
+      if(schoolsToCompare.length > 0) {
+        document.querySelector(".save-reload").style.display = "block";
+      }
+
       // Show catchments of highlighted schools
       showCatchments(schoolsToCompare);
 
@@ -274,6 +274,9 @@ function prepareHighlight() {
       // Save current state to URL
       saveStateToUrl(schoolsToCompare);
     });
+    }
+
+
   }
 }
 

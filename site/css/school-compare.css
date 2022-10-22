@@ -1,0 +1,63 @@
+/* ---------------------------------------------- */
+
+/* School comparison */
+
+/* ---------------------------------------------- */
+
+@media only screen and (max-width: 1200px) {
+  .school-compare-wrapper {
+    position: relative;
+    top: 80vh;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .school-compare-wrapper {
+    position: relative;
+    top: 2em;
+  }
+}
+
+#school-compare-container {
+  max-height: 87vh;
+  overflow: auto;
+  margin-top: 1em;
+}
+
+@media only screen and (max-width: 1200px) {
+  #school-compare-container {
+    max-height: 45vh;
+    overflow: auto;
+    margin-top: 1em;
+  }
+}
+
+.school-compare-item {
+  border: 2px solid #353795;
+  margin: 1em 0.5em 1em 0;
+  padding: 0.5em 0.5em 0.5em 1em;
+  background-color: #fff;
+}
+
+.school-compare-item > .school-name {
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0.5em 0;
+  color: #353795;
+}
+
+.school-compare-item > .content {
+  font-size: 13px;
+  margin: 0.5em 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.school-compare-item > .content > .item-title {
+  background-color: #353795;
+  color: #fff;
+  border-radius: 0.5em;
+  padding: 0.3em;
+  margin: 0.3em 0.3em 0;
+}

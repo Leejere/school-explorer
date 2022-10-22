@@ -6,11 +6,30 @@
 
 .list-container {
   margin: 1em 0 0;
-  display: flex;
-  max-height: 55vh;
-  border: 0.6px solid #aaa;
-  scrollbar-width: none;
+  max-height: 30vh;
+  border: 1.5px solid #353795;
   overflow: auto;
+  background-color: #fff;
+}
+
+.list-container-expanded {
+  margin: 1em 0 0;
+  max-height: 60vh;
+  border: 1.5px solid #353795;
+  overflow: auto;
+  background-color: #fff;
+}
+
+@media only screen and (max-width: 1200px) {
+  .list-container {
+    max-height: 9vh;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .list-container-expanded {
+    max-height: 20vh;
+  }
 }
 
 .listbox {
@@ -21,7 +40,24 @@
   display: block;
   line-height: 1em;
   padding: 0.2em;
-  font-size: 13px;
+  font-size: 12px;
+}
+
+li.school-list-item {
+  border-bottom: 1px solid #bbb;
+  padding: 0.5em;
+  background-color: #fff;
+}
+
+li.school-list-item-clicked {
+  background-color: #353795;
+  color: #fff;
+  padding: 0.5em;
+  border-bottom: 2px solid #353795;
+}
+
+li.school-list-item:hover {
+  background-color: #eee;
 }
 
 /* ---------------------------------------------- */
@@ -33,4 +69,19 @@
 .school-compare-scroll-box {
   height: 65vh;
   overflow-y: auto;
+}
+
+#school-list-expand-button {
+  background-color: #353795;
+  color: #fff;
+  width: 3em;
+  padding: 0 0.5em;
+  border-radius: 0 0 0.4em 0.4em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 12px;
+  line-height: 0.8;
+  display: none;
+  cursor: pointer;
 }

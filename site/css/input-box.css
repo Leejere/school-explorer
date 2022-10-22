@@ -1,0 +1,20 @@
+input[type="text"] {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  border: 1.5px solid #353795;
+  padding: 0.5em;
+  border-radius: 0;
+  color: #353795;
+}
+
+input:focus {
+  background-color: #fff;
+  border-radius: 0;
+  border: 3px solid #353795;
+  outline: none;
+}
+
+.fix-height {
+  height: 2em;
+}

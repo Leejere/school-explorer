@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  position: relative;
 }
 
 html {
@@ -51,71 +52,12 @@ h1 {
 }
 
 .filter-title {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 600;
   margin: 0.5em 0;
-}
-
-input[type="text"] {
-  display: block;
-  width: 100%;
-  font-size: 13px;
-}
-
-/* ---------------------------------------------- */
-
-/* School list (school name and grades served) */
-
-/* ---------------------------------------------- */
-
-li.school-list-item {
-  border-bottom: 1px solid #bbb;
-  padding: 0.9em;
-}
-
-li.school-list-item-clicked {
-  background-color: #000;
   color: #fff;
-  padding: 0.9em;
-  border-bottom: 1px solid #000;
-}
-
-li.school-list-item:hover {
-  background-color: #eee;
-}
-
-/* ---------------------------------------------- */
-
-/* School comparison */
-
-/* ---------------------------------------------- */
-
-.school-compare-item {
-  border: 2px solid #000;
-  margin: 1em 0.5em 1em 0;
-  padding: 0.5em 0.5em 0.5em 1em;
-}
-
-.school-compare-item > .school-name {
-  font-size: 17px;
-  font-weight: 800;
-  margin: 0.5em 0;
-}
-
-.school-compare-item > .content {
-  font-size: 13px;
-  margin: 0.5em 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.school-compare-item > .content > .item-title {
-  background-color: #000;
-  color: #fff;
-  border-radius: 0.5em;
-  padding: 0.3em;
-  margin: 0.3em 0.3em 0;
+  background-color: #353795;
+  padding: 0.25em;
 }
 
 /* ---------------------------------------------- */
@@ -137,60 +79,24 @@ By setting it static, the attribution will have no longer have issues.
 
 /* ---------------------------------------------- */
 
-/* Styling for check boxes */
+/* The right column will be cleared to below when on small screens */
 
 /* ---------------------------------------------- */
 
-/* First the container */
-
-#grade-select-set::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.grade-checkbox-text {
-  width: 30%;
-  float: left;
-  font-size: 13px;
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
-}
-
-.grade-select-item {
-  float: left;
-  width: 25%;
-  background-color: #fff;
-  color: #000;
-  font-weight: 800;
-  text-align: center;
-  font-size: 18px;
-  border: 1px solid #bbb;
-  padding: 0.3em 0;
-}
-
-.grade-select-item:hover {
-  background-color: #eee;
+@media only screen and (max-width: 1200px) {
+  .condition-clear {
+    clear: left;
+  }
 }
 
 /* ---------------------------------------------- */
 
-/* Bottom right links */
+/* Main filters chunk */
 
 /* ---------------------------------------------- */
 
-.save-reload {
-  display: flex;
-  justify-content: left;
-  margin: 0 -0.5em;
-  text-decoration: underline;
-}
-
-.save-reload > a,
-.save-reload > p {
-  display: block;
-  margin: 0 0.5em;
-  color: #000;
-  font-size: 14px;
-  font-weight: 800;
+.main-filters {
+  position: fixed;
+  top: 2em;
+  z-index: 9999;
 }

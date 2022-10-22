@@ -36,15 +36,13 @@ export const gradeArr = Object.keys(schools[0]).filter(key => {
 
 // First initialize the base map
 let schoolMap = document.querySelector("#school-map");
-export let baseMap = L.map(schoolMap).setView([40, -75.15], 11);
+export let baseMap = L.map(schoolMap, { zoomControl: false }).setView([40, -75.15], 11);
 // For other map tile styles, see this website:https://leaflet-extras.github.io/leaflet-providers/preview/
 
 L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=029695db-b34b-4602-a119-bcf44d2d87d6', {
     maxZoom: 20,
     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
 }).addTo(baseMap);
-
-window.schoolMap = baseMap;
 
 // Then add school content:
 // This is only the initial showing of the school points
@@ -58,24 +56,20 @@ showSchoolsOnMap(schools, baseMap);
 // Add a set of checkboxes of different grades
 for(const grade of gradeArr) {
     const html = `
-    <p class="grade-checkbox-text"><label><input type="checkbox" class="grade-checkbox" value="${grade}">${grade}</label></p>
+        <li class="grade-select-item" title="${grade}" value=0>
+            <div class="grade-select-item-inside">${grade.slice(6)}</div>
+        </li>
     `;
-    const gradeCheckbox = htmlToElement(html);
-    document.querySelector("#grade-select-set").append(gradeCheckbox);
-
-    const gradeNumber = grade.slice(6);
-    const html2 = `
-        <div class="grade-select-item" value=0>${gradeNumber}<div>
-    `;
-    const htmlElement = htmlToElement(html2);
-    document.querySelector("#grade-select").append(htmlElement);
+    const gradeSelectBox = htmlToElement(html);
+    document.querySelector("#grade-select").append(gradeSelectBox);
 }
+
 
 //-----------------------------------------------//
 // MAKING A LIST OF SCHOOLS
 //-----------------------------------------------//
 
-let schoolList = document.querySelector('#school-list');
+export let schoolList = document.querySelector('#school-list');
 
 showSchoolsInList(schools, schoolList);
 // Add event listener to prepare for highlight
@@ -86,46 +80,59 @@ prepareHighlight();
 //-----------------------------------------------//
 
 // Get all the grade-related checkboxes
-let schoolGradeFilters = document.querySelectorAll(".grade-checkbox");
+
+let schoolGradeSelectors = document.querySelectorAll(".grade-select-item, .grade-select-item-clicked");
+window.schoolGradeSelectors = schoolGradeSelectors;
 
 // Get what's inputted in the Filter By Name input box
 let schoolNameFilter = document.querySelector("#school-name-input");
 
 // Filter schools by name
+// 10.21: added feature: search word by word
 function filterByName(schoolsList) {
     let filteredSchools = schoolsList;
     const inputText = schoolNameFilter.value.toLowerCase();
-    filteredSchools = filteredSchools.filter(school =>
-       school["name"].toLowerCase().includes(inputText));
+    const keyWords = inputText.split(" ").map(s => s.replace(/\s/g, ""));
+    filteredSchools = filteredSchools.filter(school => {
+        let thisName = school["name"].toLowerCase();
+        let includesKeyWord = keyWords.map(word => thisName.includes(word));
+        return !includesKeyWord.includes(false);
+        },
+    );
     return filteredSchools;
 }
 
 // Filter schools by grade
 function filterByGrade(schoolsList) {
     let filteredSchools = schoolsList;
-    for (const checkbox of schoolGradeFilters) {
-        if (checkbox.checked) {
+    for (const gradeSelectItem of schoolGradeSelectors) {
+        if(gradeSelectItem.value == 1) {
             filteredSchools = filteredSchools.filter(school =>
-                school[checkbox.value] == '1',
+                school[gradeSelectItem.title] == '1',
             );
         }
     }
     return filteredSchools;
 }
 
-
 // On each one of them, add an event listener
 // Everytime a new change is happening, put schoollist through the two filters
 // Also, add event listener to the newly created HTMLs
 
-for(const checkbox of schoolGradeFilters){
-    checkbox.addEventListener('change', ( ) => {
+let gradeSelectItemClassNames = ['grade-select-item', 'grade-select-item-clicked'];
+
+for(const gradeSelectItem of schoolGradeSelectors) {
+    gradeSelectItem.addEventListener("click", ( ) => {
+        if(gradeSelectItem.value == 0) {
+            gradeSelectItem.value = 1;
+        } else {
+            gradeSelectItem.value = 0;
+        }
+        gradeSelectItem.className = gradeSelectItemClassNames[gradeSelectItem.value];
         schoolsShownOnMap = filterByGrade(filterByName(schools));
         showSchoolsOnMap(schoolsShownOnMap, baseMap);
         showSchoolsInList(schoolsShownOnMap, schoolList);
 
-        // PrepareHighlight is to add an event listener to every listed school
-        // Everytime the list changes, we need to re-add listeners
         prepareHighlight();
     });
 }
@@ -142,9 +149,17 @@ schoolNameFilter.addEventListener('input', ( ) => {
     prepareHighlight();
 });
 
+let legend = L.control({ position: "bottomright" });
+legend.onAdd = function(map) {
+    let div = L.DomUtil.create("div", "legend");
+    div.innerHTML += "Test";
+    return div;
+};
+
+legend.addTo(baseMap);
+
 window.schools = schools;
 window.gradeArr = gradeArr;
 window.schoolList = schoolList;
 window.schoolNameFilter = schoolNameFilter;
-window.schoolGradeFilters = schoolGradeFilters;
 window.schoolsShownOnMap = schoolsShownOnMap;

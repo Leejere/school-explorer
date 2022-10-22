@@ -1,0 +1,88 @@
+/* ---------------------------------------------- */
+
+/* Grade selectors */
+
+/* ---------------------------------------------- */
+
+/* First the container */
+
+.grade-select-container {
+  margin-bottom: 1em;
+}
+
+#grade-select {
+  overflow: hidden;
+  display: block;
+  padding-inline-start: 0;
+  margin: 0;
+}
+
+#grade-select-set::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.grade-select-title {
+  display: block;
+  float: left;
+  width: 37.5%;
+  padding: 1px;
+}
+
+.grade-select-title > .grade-select-item-inside {
+  float: left;
+  width: 100%;
+  background-color: #353795;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 15px;
+  border: 1.5px solid #353795;
+  padding: 0.1em 0;
+  display: block;
+}
+
+.grade-select-item {
+  display: block;
+  float: left;
+  width: 12.5%;
+  padding: 1px;
+}
+
+.grade-select-item-clicked {
+  display: block;
+  float: left;
+  width: 12.5%;
+  padding: 1px;
+}
+
+.grade-select-item > .grade-select-item-inside {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+  color: #353795;
+  font-weight: 800;
+  text-align: center;
+  font-size: 15px;
+  border: 1.5px solid #353795;
+  padding: 0.2em 0;
+  display: block;
+}
+
+.grade-select-item-clicked > .grade-select-item-inside {
+  width: 100%;
+  float: left;
+  background-color: #353795;
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  font-size: 15px;
+  border: 1.5px solid #353795;
+  padding: 0.2em 0;
+  display: block;
+}
+
+.grade-select-item:hover > .grade-select-item-inside {
+  background-color: #eee;
+}

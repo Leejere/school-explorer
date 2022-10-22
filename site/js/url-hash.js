@@ -5,6 +5,10 @@ import {
   highlightSchoolsOnMap,
   showSchoolsCompare,
 } from "./school-compare.js";
+import { showSchoolsOnMap } from "./school-map.js";
+import { showSchoolsInList } from "./school-list.js";
+import { baseMap } from "./main.js";
+import { schoolList } from "./main.js";
 
 //-----------------------------------------------//
 // FUNCTION TO SAVE CURRENT STATE INTO AN URL
@@ -47,6 +51,7 @@ function loadState() {
     let schoolsSelected = schools.filter(school => idArr.includes(school["sdp_id"]));
     // Get array of school names
     let schoolsSelectedNameArr = [];
+
     for(let school of schoolsSelected) {
       schoolsSelectedNameArr.push(school["name"]);
     }
@@ -58,12 +63,25 @@ function loadState() {
     // Step 3: Show compare
     showSchoolsCompare(schoolsSelectedNameArr);
 
+    let schoolsToShow = schools.filter(school => schoolsSelectedNameArr.includes(school["name"]));
+    showSchoolsOnMap(schoolsToShow, baseMap);
+    showSchoolsInList(schoolsToShow, schoolList);
+    document.querySelector(".save-reload").style.display = "block";
+    window.schoolsToShow = schoolsToShow;
+
   }
 }
 
 //-----------------------------------------------//
-// FUNCTION TO COPY NEWLY CREATED URL
+// CLICK TO COPY NEWLY CREATED URL
 //-----------------------------------------------//
+
+let urlHash = window.location.hash.substring(1, window.location.hash.length);
+let copyButton = document.querySelector("#click-to-copy-url");
+copyButton.addEventListener("click", ( ) => {
+  navigator.clipboard.writeText("https://leejere.github.io/school-explorer/site/index.html#".concat(urlHash));
+  copyButton.innerHTML = `Share Selection<span class="tooltiptext">Copied selection URL</span>`;
+});
 
 window.onload = loadState;
 

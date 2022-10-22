@@ -17,6 +17,28 @@ function makeSchoolFeature(school) {
         "geometry": school["geom"],
     };
 }
+
+function getLevelColors(level) {
+    return level === "High" ? "#353795":
+           level === "Middle" ? "#353795":
+           level === "Elementary-Middle" ? "#353795":
+           level === "Elementary" ? "#353795":
+           level === "Middle-High" ? "#353795":
+           level === "Transition/Overage School" ? "#353795":
+           level === "Elementary-Middle-High" ? "#353795":
+                     "#353795";
+}
+
+function schoolMarkerStyle(feature) {
+    return {
+        radius: 5,
+        color: getLevelColors(feature.properties.school_level),
+        fillOpacity: 0.5,
+        stroke: true,
+        weight: 0.7,
+    };
+}
+
 // Function 3: show school features on the base map
 function showSchoolsOnMap(schoolsToShow, baseMap) {
 
@@ -45,13 +67,7 @@ function showSchoolsOnMap(schoolsToShow, baseMap) {
         // in this case, use L.circleMarker
         pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
         // Style is also an option to be called inside geoJSON.
-        style: {
-            radius: 5,
-            color: "#353795",
-            fillOpacity: 0.5,
-            stroke: true,
-            weight: 0.7,
-        },
+        style: schoolMarkerStyle,
     })
     .bindPopup(schoolPoint => schoolPoint.feature.properties['school_name'])
     .openPopup().addTo(baseMap);

@@ -15,72 +15,80 @@
         <link rel="stylesheet" href="css/framework.css">
         <!-- General styles -->
         <link rel="stylesheet" href="css/styles.css">
-        <!-- Scroll list -->
+        <!-- Styles of specific modules -->
         <link rel="stylesheet" href="css/scroll-list.css">
+        <link rel="stylesheet" href="css/grade-selector.css">
+        <link rel="stylesheet" href="css/input-box.css">
+        <link rel="stylesheet" href="css/school-compare.css">
+        <link rel="stylesheet" href="css/banner.css">
+        <link rel="stylesheet" href="css/save-load.css">
+
+        <!-- Google Icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
 
-    <body>                     
+    <body>
+        
+        <!-- Map background -->
+        <div class="map-background position-fixed">
+            <div id="school-map" class="entire-width-height"></div>
         </div>
+
+        <!-- Banner -->
+        <div class="banner">Explore Philadelphia's Schools!</div>
 
         <!-- Setting the outermost frame of the whole page -->
-        <div class="main">
-            <!-- Title of the whole page -->
-            <div class="row">
-                <div class="col-sm-12 col-l-12 col-xl-12">
-                    <div class="title-block">
-                        <h1>School Explorer</h1>
-                    </div>
-                </div>
+
+        <!-- Core Content -->
+        <!-- FIRST COLUMN -->
+        <div class="col-sm-6 col-l-4 col-xl-4 col-xxl-3 main-filters">
+            <!-- Grade Selector -->
+            <div class="grade-select-container">
+                <ul id="grade-select">
+                    <li class="grade-select-title">
+                        <div class="grade-select-item-inside">Select grade</div>
+                    </li>
+                </ul>
             </div>
 
-            <!-- Main -->
-            <div class="row">
-                <!-- Map (first column) -->
-                <div class="col-sm-12 col-l-6 col-xl-6">
-                    <div class="viewport-70 padding-right-big-screen">
-                        <div id="school-map" class="entire-width-height"></div>
-                    </div>
+            <!--Name selector -->
+            <div class="fix-height">
+                <div class="input-box">
+                    <input type="text" class="text-input" id="school-name-input" placeholder="Search by Name">
                 </div>
-                <!-- Second column: the two filters AND school list-->
-                <div class="col-sm-6 col-l-3 col-xl-3">
-                    <div class="viewport-70 flex-column-space-between">
-                        <div class="filter-title">Filter by Grade</div>
-                        <!-- A set of checkboxes; this is added in main.js -->
-                        <div id="grade-select-set"></div>
-
-                        <div class="filter-title">Filter by Name</div>
-                        <!-- Add a text input box -->
-                        <div class="input-box">
-                            <input type="text" class="text-input" id="school-name-input" placeholder="Enter Name">
-                        </div>
-                        <!-- A box that shows all the schools filtered -->
-                        <div class="list-container">
-                            <ul id="school-list" class="listbox"></ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-l-3 col-xl-3">
-                    <div class="viewport-70 flex-column-space-between">
-                        <div class="school-compare-scroll-box">
-                            <div id="school-compare-container"></div>
-                        </div>
-                        <div class="save-reload">
-                            <p id="click-to-copy-url">Share Selection</p>
-                            <a href="index.html">Clear Selection</a>
-                        </div>
-                    </div>
-                </div>
-
+            </div>
+            <!-- School list -->
+            <div class="list-container">
+                <ul id="school-list" class="listbox"></ul>
+            </div>
+            <div id="school-list-expand-button">
+                <span class="material-symbols-outlined">expand_more</span>
             </div>
         </div>
-            
+
+        <!-- SECOND COLUMN -->
+        <div class="col-sm-6 col-l-4 col-xl-3 float-right condition-dragdown">
+            <!-- Result pool -->
+            <div class="school-compare-wrapper">
+                <div class="save-reload">
+                    <div id="click-to-copy-url" class="save-reload-inner">
+                        Share Selection<span class="tooltiptext">Copy selection URL</span>
+                    </div>
+                    <div class="save-reload-inner"><a href="index.html">Clear Selection</a></div>
+                </div>
+                <div id="school-compare-container"></div>
+            </div>
         </div>
+
         <!-- Leaflet JavaScript-->
         <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
         <script type="module" src="js/main.js"></script>
         <script type="module" src="js/school-compare.js"></script>
         <script type="module" src="js/url-hash.js"></script>
+        <script type="module" src="js/expand-list.js"></script>
         <!-- LoDash -->
         <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+        
     </body>
 </html>
